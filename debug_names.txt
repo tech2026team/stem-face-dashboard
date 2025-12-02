@@ -1,0 +1,19 @@
+Found 46 names
+Sample log key: '2115580' type: <class 'str'>
+Sample tutor key: 'T4803771' type: <class 'str'>
+Is T5060917 in logs? True
+Is T5060917 in tutors? True
+
+Log keys sample:
+'2115580'
+'2192067'
+'2425166'
+'2598056'
+'2630571'
+
+Tutor keys sample:
+'T4803771'
+'T4402520'
+'T8504243'
+'T1494178'
+'T3348384'

@@ -238,7 +238,7 @@ def authenticate_user(email, password):
             user_row = df_local[df_local['email'] == email]
             if not user_row.empty:
                 user = user_row.iloc[0]
-                if not user.get('active', True):
+                if not user.get('active', user.get('is_active', True)):
                     return False, "User account is inactive."
                 stored_hash = user.get('password_hash', '')
                 if stored_hash:
@@ -325,7 +325,9 @@ def authenticate_user(email, password):
                         return False, "Invalid email or password."
                 else:
                     logger.warning(f"User {email} not found in custom users table")
-                    return False, "Invalid email or password."
+                    # Fall back to local CSV if available
+                    csv_ok, csv_msg = _try_csv_auth()
+                    return (csv_ok, csv_msg)
                     
             except Exception as custom_error:
                 logger.error(f"Custom authentication error for {email}: {custom_error}")

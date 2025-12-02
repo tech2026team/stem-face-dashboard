@@ -1,21 +1,21 @@
 tutor_id,user_id,bio,specializations,max_appointments_per_day,is_available,joined_date
-T4803771,USER0001,Experienced tutor specializing in Chemistry,"Mathematics,Biology",5,True,2024-05-04T15:55:44.557201
-T4402520,USER0002,Experienced tutor specializing in Mathematics,"Chemistry,Biology,Computer Science",5,True,2025-09-23T15:55:44.557237
-T8504243,USER0003,Experienced tutor specializing in Computer Science,"Chemistry,Physics",6,True,2025-06-17T15:55:44.557247
-T1494178,USER0004,Experienced tutor specializing in Mathematics,Chemistry,6,True,2024-06-05T15:55:44.557253
-T3348384,USER0005,Experienced tutor specializing in Engineering,"Biology,Mathematics,Computer Science",5,True,2024-12-21T15:55:44.557260
-T6677114,USER0006,Experienced tutor specializing in Computer Science,"Chemistry,Mathematics",6,True,2025-10-28T15:55:44.557265
-T2187626,USER0007,Experienced tutor specializing in Engineering,Biology,6,True,2024-05-05T15:55:44.557270
-T9684678,USER0008,Experienced tutor specializing in Biology,Physics,4,True,2025-07-09T15:55:44.557274
-T3061470,USER0009,Experienced tutor specializing in Chemistry,"Physics,Computer Science",4,True,2024-03-24T15:55:44.557284
-T2092314,USER0010,Experienced tutor specializing in Chemistry,"Chemistry,Engineering",3,True,2025-04-02T15:55:44.557290
-T6959305,USER0011,Experienced tutor specializing in Chemistry,"Biology,Chemistry,Mathematics",3,True,2024-08-03T15:55:44.557296
-T1430187,USER0012,Experienced tutor specializing in Computer Science,"Engineering,Mathematics,Computer Science",5,True,2024-02-09T15:55:44.557302
-T5140077,USER0013,Experienced tutor specializing in Physics,"Physics,Mathematics",6,True,2024-08-11T15:55:44.557308
-T2321056,USER0014,Experienced tutor specializing in Physics,Mathematics,5,True,2024-12-01T15:55:44.557313
-T9902128,USER0015,Experienced tutor specializing in Chemistry,Engineering,6,True,2024-08-10T15:55:44.557318
-T9201631,USER0016,Experienced tutor specializing in Biology,Mathematics,4,True,2025-02-09T15:55:44.557323
-T9687752,USER0017,Experienced tutor specializing in Chemistry,"Mathematics,Computer Science,Physics",5,True,2025-10-05T15:55:44.557328
-T6295819,USER0018,Experienced tutor specializing in Engineering,"Computer Science,Physics",4,True,2025-03-10T15:55:44.557333
-T3445163,USER0019,Experienced tutor specializing in Physics,Chemistry,4,True,2024-09-21T15:55:44.557338
-T5060917,USER0020,Experienced tutor specializing in Biology,Mathematics,4,True,2025-03-30T15:55:44.557343
+2115580,USER_2115580,Experienced tutor: Saanvi Joshi,General Science,5,True,2025-12-02T12:31:15.986389
+2192067,USER_2192067,Experienced tutor: James Martin,General Science,5,True,2025-12-02T12:31:15.986389
+2425166,USER_2425166,Experienced tutor: Aarav Shah,General Science,5,True,2025-12-02T12:31:15.986389
+2598056,USER_2598056,Experienced tutor: Liam Johnson,General Science,5,True,2025-12-02T12:31:15.986389
+2630571,USER_2630571,Experienced tutor: Avni Desai,General Science,5,True,2025-12-02T12:31:15.986389
+2701634,USER_2701634,Experienced tutor: Emily Brown,General Science,5,True,2025-12-02T12:31:15.986389
+2750869,USER_2750869,Experienced tutor: Neha Patel,General Science,5,True,2025-12-02T12:31:15.986389
+3534553,USER_3534553,Experienced tutor: Benjamin Lewis,General Science,5,True,2025-12-02T12:31:15.986389
+4146623,USER_4146623,Experienced tutor: Noah Wilson,General Science,5,True,2025-12-02T12:31:15.986389
+6362733,USER_6362733,Experienced tutor: Meera Nair,General Science,5,True,2025-12-02T12:31:15.986389
+6403246,USER_6403246,Experienced tutor: Isabella Davis,General Science,5,True,2025-12-02T12:31:15.986389
+6474141,USER_6474141,Experienced tutor: Anaya Sharma,General Science,5,True,2025-12-02T12:31:15.986389
+6664205,USER_6664205,Experienced tutor: Mason Lee,General Science,5,True,2025-12-02T12:31:15.986389
+6887917,USER_6887917,Experienced tutor: Lucas Moore,General Science,5,True,2025-12-02T12:31:15.986389
+7134699,USER_7134699,Experienced tutor: Vivaan Kumar,General Science,5,True,2025-12-02T12:31:15.986389
+7264805,USER_7264805,Experienced tutor: Isha Reddy,General Science,5,True,2025-12-02T12:31:15.986389
+7644166,USER_7644166,Experienced tutor: Ryan Scott,General Science,5,True,2025-12-02T12:31:15.986389
+7916493,USER_7916493,Experienced tutor: Arjun Kapoor,General Science,5,True,2025-12-02T12:31:15.986389
+8853681,USER_8853681,Experienced tutor: Aanya Mehta,General Science,5,True,2025-12-02T12:31:15.986389
+9323660,USER_9323660,Experienced tutor: Zoya Singh,General Science,5,True,2025-12-02T12:31:15.986389

@@ -105,9 +105,22 @@ def api_current_user():
 @admin_bp.route('/api/dashboard-stats')
 def api_dashboard_stats():
     """Get dashboard statistics - Updated to use Phase 1 & 2 SchedulingAnalytics"""
-    user, redirect_response = require_admin_access()
-    if redirect_response or not user:
-        return jsonify({'error': 'Unauthorized'}), 401
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    try:
+        user, redirect_response = require_admin_access()
+        if redirect_response:
+            logger.warning(f"Dashboard stats unauthorized: redirecting. User: {user}")
+            return jsonify({'error': 'Unauthorized', 'redirect': True}), 401
+        if not user:
+            logger.warning("Dashboard stats unauthorized: no user")
+            return jsonify({'error': 'Unauthorized'}), 401
+            
+        logger.info(f"Fetching dashboard stats for user: {user.get('email')}")
+    except Exception as e:
+        logger.error(f"Auth check error: {e}")
+        return jsonify({'error': 'Authentication error'}), 500
     
     try:
         from app.core.analytics import SchedulingAnalytics
@@ -186,7 +199,21 @@ def api_dashboard_stats():
             'total_appointments': summary.get('total_checkins', 0)
         }
         
-        return jsonify(stats)
+        # Sanitize stats to remove NaN values
+        def sanitize_for_json(obj):
+            import math
+            import numpy as np
+            if isinstance(obj, dict):
+                return {k: sanitize_for_json(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [sanitize_for_json(v) for v in obj]
+            elif isinstance(obj, float) and (math.isnan(obj) or np.isnan(obj)):
+                return None
+            elif pd.isna(obj):
+                return None
+            return obj
+            
+        return jsonify(sanitize_for_json(stats))
     except Exception as e:
         import logging
         logger = logging.getLogger(__name__)

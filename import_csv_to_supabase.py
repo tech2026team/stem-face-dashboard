@@ -71,7 +71,7 @@ def import_users():
                 'password_hash': str(row.get('password_hash', '')) if pd.notna(row.get('password_hash')) else None,
                 'full_name': str(row.get('full_name', '')) if pd.notna(row.get('full_name')) else None,
                 'role': str(row.get('role', 'tutor')).lower(),
-                'active': convert_bool(row.get('is_active', True)),
+                'active': convert_bool(row.get('active', row.get('is_active', True))),
                 'tutor_id': str(row.get('tutor_id', '')) if pd.notna(row.get('tutor_id')) else None,
             }
             
@@ -89,7 +89,7 @@ def import_users():
         for i in range(0, len(records), batch_size):
             batch = records[i:i+batch_size]
             try:
-                response = supabase.table('users').insert(batch).execute()
+                response = supabase.table('users').upsert(batch).execute()
                 total_inserted += len(batch)
                 logger.info(f"Inserted {total_inserted}/{len(records)} users")
             except Exception as e:
@@ -97,7 +97,7 @@ def import_users():
                 # Try inserting one by one to find problematic records
                 for record in batch:
                     try:
-                        supabase.table('users').insert(record).execute()
+                        supabase.table('users').upsert(record).execute()
                         total_inserted += 1
                     except Exception as err:
                         logger.error(f"Failed to insert user {record.get('email')}: {err}")
@@ -145,7 +145,7 @@ def import_tutors():
         for i in range(0, len(records), batch_size):
             batch = records[i:i+batch_size]
             try:
-                response = supabase.table('tutors').insert(batch).execute()
+                response = supabase.table('tutors').upsert(batch).execute()
                 total_inserted += len(batch)
                 logger.info(f"Inserted {total_inserted}/{len(records)} tutors")
             except Exception as e:
@@ -153,7 +153,7 @@ def import_tutors():
                 # Try one by one
                 for record in batch:
                     try:
-                        supabase.table('tutors').insert(record).execute()
+                        supabase.table('tutors').upsert(record).execute()
                         total_inserted += 1
                     except Exception as err:
                         logger.error(f"Failed to insert tutor {record.get('tutor_id')}: {err}")
@@ -194,14 +194,14 @@ def import_courses():
         for i in range(0, len(records), batch_size):
             batch = records[i:i+batch_size]
             try:
-                response = supabase.table('courses').insert(batch).execute()
+                response = supabase.table('courses').upsert(batch).execute()
                 total_inserted += len(batch)
                 logger.info(f"Inserted {total_inserted}/{len(records)} courses")
             except Exception as e:
                 logger.error(f"Error inserting courses batch {i//batch_size + 1}: {e}")
                 for record in batch:
                     try:
-                        supabase.table('courses').insert(record).execute()
+                        supabase.table('courses').upsert(record).execute()
                         total_inserted += 1
                     except Exception as err:
                         logger.error(f"Failed to insert course {record.get('course_id')}: {err}")
@@ -269,14 +269,14 @@ def import_appointments():
         for i in range(0, len(records), batch_size):
             batch = records[i:i+batch_size]
             try:
-                response = supabase.table('appointments').insert(batch).execute()
+                response = supabase.table('appointments').upsert(batch).execute()
                 total_inserted += len(batch)
                 logger.info(f"Inserted {total_inserted}/{len(records)} appointments")
             except Exception as e:
                 logger.error(f"Error inserting appointments batch {i//batch_size + 1}: {e}")
                 for record in batch:
                     try:
-                        supabase.table('appointments').insert(record).execute()
+                        supabase.table('appointments').upsert(record).execute()
                         total_inserted += 1
                     except Exception as err:
                         logger.error(f"Failed to insert appointment {record.get('appointment_id')}: {err}")
@@ -314,7 +314,7 @@ def import_shifts():
         
         if records:
             try:
-                response = supabase.table('shifts').insert(records).execute()
+                response = supabase.table('shifts').upsert(records).execute()
                 logger.info(f"[SUCCESS] Imported {len(records)} shifts")
                 return len(records)
             except Exception as e:
@@ -365,7 +365,7 @@ def import_shift_assignments():
         
         if records:
             try:
-                response = supabase.table('shift_assignments').insert(records).execute()
+                response = supabase.table('shift_assignments').upsert(records).execute()
                 logger.info(f"[SUCCESS] Imported {len(records)} shift assignments")
                 return len(records)
             except Exception as e:
@@ -417,7 +417,7 @@ def import_availability():
         
         if records:
             try:
-                response = supabase.table('availability').insert(records).execute()
+                response = supabase.table('availability').upsert(records).execute()
                 logger.info(f"[SUCCESS] Imported {len(records)} availability records")
                 return len(records)
             except Exception as e:
@@ -462,7 +462,7 @@ def import_time_slots():
         
         if records:
             try:
-                response = supabase.table('time_slots').insert(records).execute()
+                response = supabase.table('time_slots').upsert(records).execute()
                 logger.info(f"[SUCCESS] Imported {len(records)} time slots")
                 return len(records)
             except Exception as e:
@@ -496,7 +496,7 @@ def import_tutor_courses():
         
         if records:
             try:
-                response = supabase.table('tutor_courses').insert(records).execute()
+                response = supabase.table('tutor_courses').upsert(records).execute()
                 logger.info(f"[SUCCESS] Imported {len(records)} tutor-course relationships")
                 return len(records)
             except Exception as e:
@@ -543,7 +543,7 @@ def import_audit_log():
         
         if records:
             try:
-                response = supabase.table('audit_log').insert(records).execute()
+                response = supabase.table('audit_log').upsert(records).execute()
                 logger.info(f"[SUCCESS] Imported {len(records)} audit log entries")
                 return len(records)
             except Exception as e:

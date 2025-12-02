@@ -34,6 +34,10 @@ class SchedulingAnalytics:
                 on='user_id', 
                 how='left'
             )
+            # Fill NaN full_names
+            if 'full_name' in self.tutors.columns:
+                self.tutors['full_name'] = self.tutors['full_name'].fillna('')
+
     
     def load_appointments(self):
         """Load appointments data"""
@@ -215,40 +219,53 @@ class SchedulingAnalytics:
     def appointments_per_tutor(self, **filters):
         """Get number of appointments per tutor"""
         df = self.filter_data(**filters)
-        if df.empty:
-            return {}
         
-        # Group by tutor and count
-        result = df.groupby('tutor_id').size().to_dict()
+        # Initialize with 0 for all tutors
+        result = {str(tid): 0 for tid in self.tutors['tutor_id'].unique()}
+        
+        if not df.empty:
+            # Group by tutor and count
+            counts = df.groupby('tutor_id').size().to_dict()
+            result.update({str(k): v for k, v in counts.items()})
         
         # Replace tutor IDs with names
         tutor_names = {}
         for tid, count in result.items():
-            tutor = self.tutors[self.tutors['tutor_id'] == tid]
+            tutor = self.tutors[self.tutors['tutor_id'].astype(str) == str(tid)]
             if not tutor.empty:
                 name = tutor.iloc[0].get('full_name', f"Tutor {tid}")
+                # If name is empty string, fall back to ID
+                if not name: name = f"Tutor {tid}"
                 tutor_names[name] = count
+            else:
+                tutor_names[f"Tutor {tid}"] = count
         
-        return tutor_names if tutor_names else result
+        return tutor_names
     
     def hours_per_tutor(self, **filters):
         """Get total scheduled hours per tutor"""
         df = self.filter_data(**filters)
-        if df.empty:
-            return {}
         
-        # Sum duration hours by tutor
-        result = df.groupby('tutor_id')['duration_hours'].sum().to_dict()
+        # Initialize with 0 for all tutors
+        result = {str(tid): 0.0 for tid in self.tutors['tutor_id'].unique()}
+        
+        if not df.empty:
+            # Sum duration hours by tutor
+            hours_data = df.groupby('tutor_id')['duration_hours'].sum().to_dict()
+            result.update({str(k): float(v) for k, v in hours_data.items()})
         
         # Replace tutor IDs with names
         tutor_hours = {}
         for tid, hours in result.items():
-            tutor = self.tutors[self.tutors['tutor_id'] == tid]
+            tutor = self.tutors[self.tutors['tutor_id'].astype(str) == str(tid)]
             if not tutor.empty:
                 name = tutor.iloc[0].get('full_name', f"Tutor {tid}")
+                if not name: name = f"Tutor {tid}"
                 tutor_hours[name] = round(float(hours), 2)
+            else:
+                tutor_hours[f"Tutor {tid}"] = round(float(hours), 2)
         
-        return tutor_hours if tutor_hours else result
+        return tutor_hours
     
     def daily_appointments(self, **filters):
         """Get appointments per day"""
@@ -341,22 +358,30 @@ class SchedulingAnalytics:
     def tutor_workload(self, **filters):
         """Calculate tutor workload (appointments + hours)"""
         df = self.filter_data(**filters)
-        if df.empty:
-            return {}
         
-        # Calculate workload score: appointments * avg_duration
-        workload = df.groupby('tutor_id').agg({
-            'appointment_id': 'count',
-            'duration_hours': 'sum'
-        }).to_dict('index')
-        
+        # Initialize with 0 for all tutors
         result = {}
-        for tid, data in workload.items():
-            tutor = self.tutors[self.tutors['tutor_id'] == tid]
+        all_tutors = self.tutors['tutor_id'].unique()
+        
+        # Calculate workload if data exists
+        workload = {}
+        if not df.empty:
+            workload = df.groupby('tutor_id')['duration_hours'].sum().to_dict()
+            
+        for tid in all_tutors:
+            tid_str = str(tid)
+            tutor = self.tutors[self.tutors['tutor_id'].astype(str) == tid_str]
             if not tutor.empty:
                 name = tutor.iloc[0].get('full_name', f"Tutor {tid}")
-                # Workload score = total hours
-                result[name] = round(float(data['duration_hours']), 2)
+                if not name: name = f"Tutor {tid}"
+                
+                # Workload score = total hours (or 0 if not in workload)
+                hours = workload.get(tid, 0)
+                # Try string key if int failed
+                if hours == 0 and tid_str in workload:
+                    hours = workload[tid_str]
+                    
+                result[name] = round(float(hours), 2)
         
         return result
     

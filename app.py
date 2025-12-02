@@ -561,41 +561,54 @@ def api_admin_create_user():
             # Query Supabase Auth for existing user by email
             existing_user = None
             try:
+                # This requires service_role key usually
                 existing_user_resp = supabase.auth.admin.list_users(email=data['email'])
                 if hasattr(existing_user_resp, 'users') and existing_user_resp.users:
                     existing_user = existing_user_resp.users[0]
             except Exception as check_e:
-                print(f"Supabase Auth check exception: {check_e}")
+                logger.warning(f"Supabase Auth check failed (likely permissions): {check_e}")
+            
             if existing_user:
                 return jsonify({'error': 'A user with this email address already exists in Supabase Auth.'}), 400
-            # Proceed with user creation as before
-            response = supabase.auth.admin.create_user({
-                "email": data['email'],
-                "password": data['password'],
-                "user_metadata": {
-                    "role": data['role'],
-                    "full_name": data['full_name']
-                },
-                "email_confirm": True
-            })
-            if not getattr(response, 'user', None):
-                print(f"Supabase Auth error: {response}")
-                return jsonify({'error': 'Failed to create user in Supabase Auth', 'details': str(response)}), 400
+                
+            # Try to create in Supabase Auth
             try:
-                db_result = supabase.table("users").insert({
+                response = supabase.auth.admin.create_user({
                     "email": data['email'],
-                    "role": data['role'],
-                    "full_name": data['full_name'],
-                    "created_at": datetime.now().isoformat()
-                }).execute()
-                print(f"Supabase DB insert result: {db_result}")
-            except Exception as db_e:
-                print(f"[Supabase DB] Failed to insert user into users table: {db_e}")
+                    "password": data['password'],
+                    "user_metadata": {
+                        "role": data['role'],
+                        "full_name": data['full_name']
+                    },
+                    "email_confirm": True
+                })
+                
+                # Check for success
+                if not getattr(response, 'user', None):
+                    logger.warning(f"Supabase Auth create failed: {response}")
+                    # Don't return 400 here, fall back to CSV
+                else:
+                    # If Auth create succeeded, try to insert into users table
+                    try:
+                        supabase.table("users").insert({
+                            "email": data['email'],
+                            "role": data['role'],
+                            "full_name": data['full_name'],
+                            "created_at": datetime.now().isoformat()
+                        }).execute()
+                    except Exception as db_e:
+                        logger.error(f"[Supabase DB] Failed to insert user into users table: {db_e}")
+                        
+            except Exception as create_e:
+                logger.warning(f"Could not create user in Supabase Auth (likely permissions): {create_e}")
+                # Fallback to CSV
+                
         except Exception as e:
-            print(f"Supabase Auth exception: {e}")
-            return jsonify({'error': f'Could not create user in Supabase Auth: {e}'}), 400
+            logger.error(f"Supabase Auth exception: {e}")
+            # Fallback to CSV
     else:
-        return jsonify({'error': 'Supabase not configured'}), 500
+        # Supabase not configured, proceed to CSV
+        pass
 
     # 2. Add to users.csv as before
     new_user = {
