@@ -1,1 +1,16 @@
 appointment_id,tutor_id,student_name,student_email,course_id,appointment_date,start_time,end_time,status,booking_type,confirmation_status,notes,created_at,updated_at
+APT00001,7644166,Charlie Brown,charlie.b@university.edu,CRS0008,2025-12-03,12:00:00,13:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00002,2630571,Evan Wright,evan.w@university.edu,CRS0014,2025-12-07,16:00:00,17:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00003,2425166,Bob Smith,bob.s@university.edu,CRS0009,2025-12-03,10:00:00,11:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00004,2425166,Diana Prince,diana.p@university.edu,CRS0023,2025-12-07,10:00:00,11:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00005,6362733,Diana Prince,diana.p@university.edu,CRS0015,2025-12-03,11:00:00,12:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00006,9323660,Bob Smith,bob.s@university.edu,CRS0020,2025-12-03,16:00:00,17:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00007,6664205,Bob Smith,bob.s@university.edu,CRS0023,2025-12-08,08:00:00,09:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00008,6474141,Bob Smith,bob.s@university.edu,CRS0006,2025-12-04,16:00:00,17:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00009,4146623,Evan Wright,evan.w@university.edu,CRS0022,2025-12-09,15:00:00,16:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00010,6664205,Bob Smith,bob.s@university.edu,CRS0003,2025-12-08,17:00:00,18:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00011,7644166,Alice Johnson,alice.j@university.edu,CRS0007,2025-12-07,08:00:00,09:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00012,8853681,Diana Prince,diana.p@university.edu,CRS0019,2025-12-05,09:00:00,10:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00013,2598056,Evan Wright,evan.w@university.edu,CRS0014,2025-12-05,13:00:00,14:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00014,6664205,Diana Prince,diana.p@university.edu,CRS0023,2025-12-05,10:00:00,11:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
+APT00015,2701634,Alice Johnson,alice.j@university.edu,CRS0010,2025-12-09,12:00:00,13:00:00,scheduled,student_booked,pending,Dummy appointment,2025-12-02T13:36:50.682399,2025-12-02T13:36:50.682399
