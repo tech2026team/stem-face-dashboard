@@ -1,0 +1,27 @@
+{
+  "integratedAt": "2026-03-24T14:23:22.701682Z",
+  "source": "user-story-automation",
+  "user": {
+    "email": "jaypatel81999@gmail.com",
+    "github": "tech2026team"
+  },
+  "totalStories": 2,
+  "stories": [
+    {
+      "definitionOfDone": "• Architecture Design: Design of the data processing and aggregation modules within the system.",
+      "description": "The system must perform local data processing and aggregation before transmitting data via satellite.",
+      "id": 1,
+      "source_quote": "",
+      "testCases": "Test System Availability: Verify that the system is available to deliver insulin when required.\nTest System Reliability: Verify that the system performs reliably and delivers the correct amount of insulin to counteract the current level of blood sugar.\nTest Continuous Blood Sugar Monitoring: Verify that the system continuously monitors blood sugar levels using a microsensor embedded in the patient.\nTest Automated Insulin Delivery: Verify that the system delivers an appropriate dose of insulin when needed, taking into account changes in blood glucose levels over time.\nTest User Interface: Verify that the system provides a user-friendly interface to allow users to track their blood sugar levels and adjust settings as needed.\nTest Safety Features: Verify that the system has built-in safety features to prevent pump failure and ensure safe operation, including alerts for high or low blood sugar levels.\nTest Data Security: Verify that the system securely stores and transmits sensitive user data, including blood glucose levels and insulin dosing information.\nTest Insulin Dose Adjustment: Verify that the system adjusts the dose of insulin delivered in response to changes in blood glucose levels.\nTest Alert System: Verify that the system has an alert system to notify users of potential high or low blood sugar levels, allowing for timely intervention.\nTest System Maintenance: Verify that the system is designed and implemented to ensure easy maintenance, updates, and troubleshooting.",
+      "title": "Perform Local Data Processing Aggregation"
+    },
+    {
+      "definitionOfDone": "• Unit Tests: Unit tests for reliability and accuracy of insulin dosing algorithms.",
+      "description": "The system shall perform reliably and deliver the correct amount of insulin to counteract the current level of blood sugar.",
+      "id": 3,
+      "source_quote": "",
+      "testCases": "Test System Availability: Verify that the system is available to deliver insulin when required.\nTest System Reliability: Verify that the system performs reliably and delivers the correct amount of insulin to counteract the current level of blood sugar.\nTest Continuous Blood Sugar Monitoring: Verify that the system continuously monitors blood sugar levels using a microsensor embedded in the patient.\nTest Automated Insulin Delivery: Verify that the system delivers an appropriate dose of insulin when needed, taking into account changes in blood glucose levels over time.\nTest User Interface: Verify that the system provides a user-friendly interface to allow users to track their blood sugar levels and adjust settings as needed.\nTest Safety Features: Verify that the system has built-in safety features to prevent pump failure and ensure safe operation, including alerts for high or low blood sugar levels.\nTest Data Security: Verify that the system securely stores and transmits sensitive user data, including blood glucose levels and insulin dosing information.\nTest Insulin Dose Adjustment: Verify that the system adjusts the dose of insulin delivered in response to changes in blood glucose levels.\nTest Alert System: Verify that the system has an alert system to notify users of potential high or low blood sugar levels, allowing for timely intervention.\nTest System Maintenance: Verify that the system is designed and implemented to ensure easy maintenance, updates, and troubleshooting.",
+      "title": "Perform Reliably Deliver Correct Amount"
+    }
+  ]
+}
